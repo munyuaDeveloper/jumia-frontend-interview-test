@@ -7,11 +7,11 @@ import {UserData} from "../interfaces/user.interface";
   providedIn: 'root'
 })
 export class UsersService {
-  private baseUrl = environment.API_SERVICE_URL;
+  public baseUrl = environment.API_SERVICE_URL;
 
   constructor(private http: HttpClient,) { }
 
   getData(param?: any) {
-    return this.http.get<UserData>(this.baseUrl, {params: param})
+    return this.http.get<any>(this.baseUrl, {params: param})
   }
 }

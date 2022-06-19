@@ -4,16 +4,7 @@ import {MatSort} from "@angular/material/sort";
 import {UsersService} from "../../services/users.service";
 import {Result} from "../../interfaces/user.interface";
 import {MatPaginator} from "@angular/material/paginator";
-interface DisplayData {
-  name: string;
-  gender: string;
-  location: string;
-  email: string;
-  current_age: string;
-  registration_seniority: string;
-  phone: string;
-  picture: string;
-}
+import {MatSelect} from "@angular/material/select";
 
 @Component({
   selector: 'app-users',
@@ -21,13 +12,19 @@ interface DisplayData {
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  /** For testing purposes */
+  @ViewChild(MatSelect) public matSelect!: MatSelect;
+
+  page: number = 1;
+  pageLimit: number = 100;
 
   dataSource!: MatTableDataSource<Result>;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  limit: number = 1000;
-  tableColumns: string[] = ['picture', 'name', 'gender', 'email', 'phone', 'age', 'registered', 'location'];
-  displayedColumns: string[] = [...this.tableColumns]
-  selectedColumns: string[] = [...this.tableColumns]
+  @ViewChild(MatSort) sort!: MatSort;
+
+  tableColumns: string[] = ['picture', 'name', 'gender', 'email', 'phone', 'dob', 'registered', 'location'];
+  displayedColumns: string[] = [...this.tableColumns];
+  selectedColumns: string[] = [...this.tableColumns];
 
   nationalities =  [
   {
@@ -96,31 +93,29 @@ export class UsersComponent implements OnInit {
     country: 'United States'
   }
 
-
-
-]
-  full: boolean = true;
-  @ViewChild(MatSort) sort!: MatSort;
+];
+  loading = false;
 
   constructor(private userService: UsersService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getData({});
   }
 
-  // handleScroll = (scrolled: boolean) => {
-  //   console.timeEnd('lastScrolled');
-  //   scrolled ? this.getData() : _noop();
-  //   console.time('lastScrolled');
-  // }
-  // hasMore = () => !this.dataSource || this.dataSource.data.length < this.limit;
-
-  getData(filter: {}) {
+  getData(filter: {}): void {
+    this.loading = true;
     const queryParams = {
-      results: 100
+      results: this.pageLimit,
+      page: this.page,
     }
    this.userService.getData({...queryParams, ...filter}).subscribe(res => {
-     this.dataSource = new MatTableDataSource(res.results);
+     this.loading = false;
+     if (this.page > 1) {
+       this.dataSource.data = this.dataSource.data.concat(res.results)
+     }else {
+       this.dataSource = new MatTableDataSource(res.results);
+     }
+
      this.dataSource.sort = this.sort;
      this.dataSource.paginator = this.paginator;
    })
@@ -128,5 +123,24 @@ export class UsersComponent implements OnInit {
 
   changeTableColumns(): void {
     this.displayedColumns = this.selectedColumns;
+    this.getData({inc: this.displayedColumns.toString()})
+  }
+
+  onTableScroll(e: any): void {
+    const tableViewHeight = e.target.offsetHeight // viewport
+    const tableScrollHeight = e.target.scrollHeight // length of all table
+    const scrollLocation = e.target.scrollTop; // how far user scrolled
+
+    // If the user has scrolled within 200px of the bottom, add more data
+    const buffer = 200;
+    const limit = tableScrollHeight - tableViewHeight - buffer;
+    if (scrollLocation > limit) {
+
+      if (!this.loading) {
+        this.page += 1;
+        this.getData({});
+      }
+
+    }
   }
 }
