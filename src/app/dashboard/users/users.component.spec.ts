@@ -10,11 +10,9 @@ import {MatOption} from "@angular/material/core";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTableModule} from "@angular/material/table";
 import {MatSortModule} from "@angular/material/sort";
-import {MatPaginatorModule} from "@angular/material/paginator";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatSelectModule} from "@angular/material/select";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {By} from "@angular/platform-browser";
 
 describe('UsersComponent', () => {
   let component: UsersComponent;
@@ -33,7 +31,6 @@ describe('UsersComponent', () => {
         MatTableModule,
         MatSortModule,
         MatTableExporterModule,
-        MatPaginatorModule,
         MatFormFieldModule,
         MatSelectModule,
       ],
@@ -56,10 +53,10 @@ describe('UsersComponent', () => {
 
   it( 'It should get users data on load', ()=>{
     component.page = 2;
-    spyOn(component, 'getData').and.callThrough();
+    spyOn(component, 'getUsers').and.callThrough();
     component.ngOnInit();
 
-    expect(component.getData).toHaveBeenCalled();
+    expect(component.getUsers).toHaveBeenCalled();
   });
 
   it('test selectionChange on column change', () => {
@@ -88,14 +85,15 @@ describe('UsersComponent', () => {
     expect(options[1].selected).toBe(true);
   });
 
-  // xit('should call onTableScroll on scroll', () => {
-  //   spyOn(component, 'onTableScroll').and.callThrough();
-  //   const container = fixture.debugElement.query(By.css('.scrollable-table'));
-  //   container.nativeElement.scrollTop =  700
-  //
-  //   fixture.detectChanges();
-  //
-  //   expect(component.onTableScroll).toHaveBeenCalledTimes(0);
-  //
-  // });
+  xit('should set fetch to true if scrollTop is greater than 200', () => {
+    const mockEvent = { srcElement: { scrollTop: 5486 } } as any;
+    const table = fixture.debugElement.nativeElement.querySelector('.scrollable-table');
+
+
+    table.scrollTo(mockEvent)
+    fixture.detectChanges();
+    spyOn(component, 'onTableScroll').and.callThrough();
+    expect(component.onTableScroll).toHaveBeenCalled();
+  });
+
 });

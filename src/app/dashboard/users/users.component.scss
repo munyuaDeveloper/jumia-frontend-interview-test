@@ -15,6 +15,7 @@
   display: block;
   width: 100%;
   overflow-x: auto;
+  margin: 0 auto;
 
   .mat-table {
     width: 100%;
@@ -23,7 +24,7 @@
     margin: 0px;
   }
   .mat-table {
-    max-height: 550px;
+    height: 90vh;
     overflow-y: scroll;
   }
 
@@ -43,12 +44,37 @@
     overflow: hidden;
     vertical-align: middle;
   }
+  .mat-header-cell {
+    font-size: 15px;
+    font-weight: 500;
+    color: #000000;
+  }
 }
 .mat-form-field {
   font-size: 14px;
   width: 25%;
   margin: 20px;
 }
-.mat-primary .mat-pseudo-checkbox-checked {
-  background-color: #f9992d;
+::ng-deep.mat-form-field-wrapper{
+  padding-bottom: 0 !important;
+}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) {
+  .mat-form-field {
+    width: 90%;
+    margin: 5px 20px;
+  }
+  .select-column{
+    margin-top: 20px;
+  }
+  .filters{
+    width: 100%;
+  }
+  .table-responsive {
+    display: block;
+    width: 92%;
+    overflow-x: auto;
+    margin: 0 auto;
+  }
 }

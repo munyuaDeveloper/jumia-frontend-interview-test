@@ -3,7 +3,6 @@ import {MatTableDataSource} from "@angular/material/table";
 import {MatSort} from "@angular/material/sort";
 import {UsersService} from "../../services/users.service";
 import {Result} from "../../interfaces/user.interface";
-import {MatPaginator} from "@angular/material/paginator";
 import {MatSelect} from "@angular/material/select";
 
 @Component({
@@ -19,7 +18,6 @@ export class UsersComponent implements OnInit {
   pageLimit: number = 100;
 
   dataSource!: MatTableDataSource<Result>;
-  @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   tableColumns: string[] = ['picture', 'name', 'gender', 'email', 'phone', 'dob', 'registered', 'location'];
@@ -99,33 +97,37 @@ export class UsersComponent implements OnInit {
   constructor(private userService: UsersService) { }
 
   ngOnInit(): void {
-    this.getData({});
+    // Fetch users on load without
+    this.getUsers({});
   }
 
-  getData(filter: {}): void {
+  //Fetch user data using user service
+  getUsers(filter: {}): void {
     this.loading = true;
     const queryParams = {
       results: this.pageLimit,
       page: this.page,
     }
-   this.userService.getData({...queryParams, ...filter}).subscribe(res => {
+   this.userService.getUsers({...queryParams, ...filter}).subscribe(res => {
      this.loading = false;
+     // Check if initial fetch or infinite scroll
      if (this.page > 1) {
        this.dataSource.data = this.dataSource.data.concat(res.results)
      }else {
        this.dataSource = new MatTableDataSource(res.results);
      }
-
      this.dataSource.sort = this.sort;
-     this.dataSource.paginator = this.paginator;
    })
   }
 
+  // Add or remove table columns
+  // Query for only selected table columns
   changeTableColumns(): void {
     this.displayedColumns = this.selectedColumns;
-    this.getData({inc: this.displayedColumns.toString()})
+    this.getUsers({inc: this.displayedColumns.toString()})
   }
 
+  // infinite scroll implementation
   onTableScroll(e: any): void {
     const tableViewHeight = e.target.offsetHeight // viewport
     const tableScrollHeight = e.target.scrollHeight // length of all table
@@ -135,10 +137,10 @@ export class UsersComponent implements OnInit {
     const buffer = 200;
     const limit = tableScrollHeight - tableViewHeight - buffer;
     if (scrollLocation > limit) {
-
+      console.log(scrollLocation)
       if (!this.loading) {
         this.page += 1;
-        this.getData({});
+        this.getUsers({});
       }
 
     }

@@ -81,8 +81,3 @@ export interface Info {
   page: number;
   version: string;
 }
-
-export interface UserData {
-  results: Result[];
-  info: Info;
-}

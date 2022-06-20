@@ -21,16 +21,16 @@ mat-sidenav {
   overflow-x: hidden;
 }
 .content {
-  height: calc(100vh - 98px);
+  height: 84vh;
   border-radius: 10px;
-  margin: 16px 16px 16px 32px;
+  margin: 30px 20px 30px 30px;
+  padding: 10px;
   font-size: 2rem;
   color: lightgray;
+  overflow-y: hidden;
 }
 .mat-drawer-content{
-  overflow-x: hidden;
-}
-mat-sidenav-container {
+  overflow: hidden;
   height: calc(100vh - 65px);
 }
 
@@ -65,7 +65,13 @@ mat-sidenav-container {
 }
 
 mat-divider {
-  margin-top: 16px;
-  margin-bottom: 16px;
+  margin: 16px 0px;
   background-color: rgba(255, 255, 255, 0.5);
+}
+
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991.98px) {
+  .content {
+    margin: 30px 20px;
+  }
 }

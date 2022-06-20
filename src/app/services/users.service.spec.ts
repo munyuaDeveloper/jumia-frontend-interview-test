@@ -30,12 +30,12 @@ describe('UsersService', () => {
     expect(sharedService).toBeTruthy();
   });
 
-  it('returned Observable should match the right data when getting getData method is called ', () => {
+  it('returned Observable should match the right data when getting getUsers method is called ', () => {
     const params = {
       page: 1,
       results: 5,
     }
-    service.getData(params)
+    service.getUsers(params)
       .subscribe(res => {
         expect(res).toEqual(UserMockData.getAllData);
       });
@@ -44,4 +44,5 @@ describe('UsersService', () => {
 
     req.flush(UserMockData.getAllData);
   });
+
 });

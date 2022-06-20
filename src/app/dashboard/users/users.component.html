@@ -1,29 +1,29 @@
-<div class="">
-  <mat-form-field appearance="outline">
+<div class="filters">
+  <button class="button" data-cy="export-csv" mat-raised-button  (click)="exporter.exportTable('csv')">Export Csv File</button>
+  <mat-form-field appearance="outline" class="select-column">
     <mat-label>Table Columns</mat-label>
-    <mat-select [(ngModel)]="selectedColumns" (selectionChange)="changeTableColumns()" ngDefaultControl  multiple>
-      <mat-option *ngFor="let topping of tableColumns" [value]="topping" aria-selected="true">{{topping}}</mat-option>
+    <mat-select data-cy="select-table-column" [(ngModel)]="selectedColumns" (selectionChange)="changeTableColumns()" ngDefaultControl  multiple>
+      <mat-option *ngFor="let column of tableColumns" [value]="column" aria-selected="true">{{column}}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Filter By Gender</mat-label>
-    <mat-select (selectionChange)="getData({gender: $event.value})">
+    <mat-select  data-cy="filter-by-gender" (selectionChange)="getUsers({gender: $event.value})">
       <mat-option value="male">Male</mat-option>
       <mat-option value="female">Female</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field appearance="outline">
     <mat-label>Filter By Nationality</mat-label>
-    <mat-select (selectionChange)="getData({nat: $event.value})">
-      <mat-option *ngFor="let nat of nationalities" [value]="nat.code">{{nat.country}}</mat-option>
+    <mat-select data-cy="filter-by-nationality" (selectionChange)="getUsers({nat: $event.value})">
+      <mat-option *ngFor="let nat of nationalities" [value]="nat?.code">{{nat?.country}}</mat-option>
     </mat-select>
   </mat-form-field>
-  <button class="button" mat-raised-button  (click)="exporter.exportTable('csv')">Export Csv File</button>
 </div>
 
 <p class="loading" *ngIf="loading">Please wait ...</p>
 <div class="table-responsive">
-  <mat-table class="scrollable-table" matTableExporter #exporter="matTableExporter" [dataSource]="dataSource" matSort (scroll)="onTableScroll($event)">
+  <mat-table  data-cy="users-table" class="scrollable-table" matTableExporter #exporter="matTableExporter" [dataSource]="dataSource" matSort (scroll)="onTableScroll($event)">
 
     <!-- picture Column -->
     <ng-container matColumnDef="picture">
