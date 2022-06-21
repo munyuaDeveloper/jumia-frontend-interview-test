@@ -1,4 +1,9 @@
 # Jumia Interview test
+This is a Single Page Application that displays a list of users in a table.
+
+## Clone the application 
+
+Run `git clone `
 
 ## Install Dependencies
 
