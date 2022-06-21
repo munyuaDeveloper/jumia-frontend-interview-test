@@ -1,10 +1,14 @@
-describe('spec.cy.js', () => {
+describe('Users Page Tests', () => {
   it('should visit', () => {
-    cy.visit('http://localhost:4200/users');
+    cy.visit('/');
+    cy.url().should('include', '/users')
+
+    cy.get('.loading').should('be.visible');
   });
 
   it('should have an export csv button', () => {
     cy.get('[data-cy=export-csv]').contains('Export Csv File');
+    cy.get('[data-cy=export-csv]').click()
   });
 
   it('should have select table column dropdown', () => {
@@ -27,15 +31,21 @@ describe('spec.cy.js', () => {
 
 
   it('should have users table', () => {
-    cy.get('[data-cy=users-table');
+    cy.get('[data-cy=users-table]')
+    .should('be.visible');
   });
 
   it('should call the random user api', () => {
     cy.server();
     cy.route('GET', 'https://randomuser.me/api?results=100&page=1', []).as('getUsers');
-    cy.visit('http://localhost:4200/users');
-    cy.wait('@getUsers')
-      .its('method').should('equal', 'GET');
   });
 
+  it('should scroll the table', () => {
+    cy.get('[data-cy=users-table]').scrollTo('bottom');
+    cy.get('.loading').should('be.visible');
+
+    cy.get('[data-cy=users-table]').scrollTo('bottom');
+    cy.get('.loading').should('be.visible');
+
+  });
 })

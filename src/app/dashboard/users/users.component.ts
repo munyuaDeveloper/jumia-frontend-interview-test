@@ -15,7 +15,7 @@ export class UsersComponent implements OnInit {
   @ViewChild(MatSelect) public matSelect!: MatSelect;
 
   page: number = 1;
-  pageLimit: number = 100;
+  pageLimit: number = 30;
 
   dataSource!: MatTableDataSource<Result>;
   @ViewChild(MatSort) sort!: MatSort;
@@ -92,7 +92,7 @@ export class UsersComponent implements OnInit {
   }
 
 ];
-  loading = false;
+  loading = true;
 
   constructor(private userService: UsersService) { }
 
