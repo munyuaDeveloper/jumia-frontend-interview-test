@@ -3,7 +3,7 @@ This is a Single Page Application that displays a list of users in a table.
 
 ## Clone the application 
 
-Run `git clone https://github.com/munyuaDeveloper/jumia-frontend-test.git`
+Run `git clone https://github.com/munyuaDeveloper/jumia-frontend-interview-test.git`
 
 ## Install Dependencies
 

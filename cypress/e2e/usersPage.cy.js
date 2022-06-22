@@ -11,13 +11,8 @@ describe('Users Page Tests', () => {
     cy.get('[data-cy=export-csv]').click()
   });
 
-  it('should have select table column dropdown', () => {
-    cy.get('[data-cy=select-table-column]');
-    cy.get('[data-cy=select-table-column]').click().get('mat-option').should('have.length', 8)
-    cy.get('body').click()
-  });
-
   it('should have filter by gender dropdown', () => {
+    cy.get('body').click();
     cy.get('[data-cy=filter-by-gender');
     cy.get('[data-cy=filter-by-gender').click().get('mat-option').should('have.length', 2);
     cy.get('body').click()
@@ -26,6 +21,12 @@ describe('Users Page Tests', () => {
   it('should have filter by nationality dropdown', () => {
     cy.get('[data-cy=filter-by-nationality]');
     cy.get('[data-cy=filter-by-nationality]').click().get('mat-option').should('have.length', 16);
+    cy.get('body').click()
+  });
+
+  it('should have select table column dropdown', () => {
+    cy.get('[data-cy=select-table-column]');
+    cy.get('[data-cy=select-table-column]').click().get('mat-option').should('have.length', 8)
     cy.get('body').click()
   });
 
@@ -42,7 +43,7 @@ describe('Users Page Tests', () => {
 
   it('should scroll the table', () => {
     cy.get('[data-cy=users-table]').scrollTo('bottom');
-    cy.get('.loading').should('be.visible');
+    // cy.get('.loading').should('be.visible');
 
     cy.get('[data-cy=users-table]').scrollTo('bottom');
     cy.get('.loading').should('be.visible');
