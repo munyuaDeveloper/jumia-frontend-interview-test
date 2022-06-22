@@ -1,6 +1,6 @@
 <div>
   <div class="filters">
-    <button class="button" data-cy="export-csv" mat-raised-button  (click)="exporter.exportTable('csv')">Export Csv File</button>
+    <button class="button" data-cy="export-csv" mat-raised-button  (click)="exporter.exportTable('csv')"> <mat-icon>download</mat-icon>Export Csv File</button>
     <mat-form-field appearance="outline" class="select-column">
       <mat-label>Table Columns</mat-label>
       <mat-select data-cy="select-table-column" [(ngModel)]="selectedColumns" (selectionChange)="changeTableColumns()" ngDefaultControl  multiple>
