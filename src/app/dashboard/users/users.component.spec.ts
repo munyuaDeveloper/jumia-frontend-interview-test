@@ -63,14 +63,14 @@ describe('UsersComponent', () => {
     // make sure the mat-select has the expected mat-options
     const options: MatOption[] = component.matSelect.options.toArray();
     expect(options.length).toBe(8);
-    expect(options[0].viewValue).toBe('picture');
-    expect(options[1].viewValue).toBe('name');
-    expect(options[2].viewValue).toBe('gender');
-    expect(options[3].viewValue).toBe('email');
-    expect(options[4].viewValue).toBe('phone');
-    expect(options[5].viewValue).toBe('dob');
-    expect(options[6].viewValue).toBe('registered');
-    expect(options[7].viewValue).toBe('location');
+    expect(options[0].viewValue).toBe('Picture');
+    expect(options[1].viewValue).toBe('Name');
+    expect(options[2].viewValue).toBe('Gender');
+    expect(options[3].viewValue).toBe('Email');
+    expect(options[4].viewValue).toBe('Phone');
+    expect(options[5].viewValue).toBe('Dob');
+    expect(options[6].viewValue).toBe('Registered');
+    expect(options[7].viewValue).toBe('Location');
 
     // set up a spy on the function that will be invoked via selectionChange
     const spy = spyOn(component, 'changeTableColumns').and.callThrough();
@@ -85,7 +85,7 @@ describe('UsersComponent', () => {
     expect(options[1].selected).toBe(true);
   });
 
-  xit('should set fetch to true if scrollTop is greater than 200', () => {
+  xit('should call onTableScroll on scroll', () => {
     const mockEvent = { srcElement: { scrollTop: 5486 } } as any;
     const table = fixture.debugElement.nativeElement.querySelector('.scrollable-table');
 

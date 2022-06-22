@@ -3,7 +3,7 @@
   <mat-form-field appearance="outline" class="select-column">
     <mat-label>Table Columns</mat-label>
     <mat-select data-cy="select-table-column" [(ngModel)]="selectedColumns" (selectionChange)="changeTableColumns()" ngDefaultControl  multiple>
-      <mat-option *ngFor="let column of tableColumns" [value]="column" aria-selected="true">{{column}}</mat-option>
+      <mat-option *ngFor="let column of tableColumns" [value]="column" aria-selected="true">{{column | titlecase}}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field appearance="outline">
