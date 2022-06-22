@@ -15,7 +15,7 @@ export class HomeComponent {
   constructor(public observer: BreakpointObserver, private cdr: ChangeDetectorRef) {}
 
   ngAfterViewInit(): void {
-    this.observer.observe(['(max-width: 900px)']).subscribe((res) => {
+    this.observer.observe(['(max-width: 1000px)']).subscribe((res) => {
       if (res.matches) {
         this.sidenav.mode = 'over';
         this.sidenav.close();

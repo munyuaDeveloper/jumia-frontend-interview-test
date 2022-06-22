@@ -52,15 +52,22 @@
 }
 .mat-form-field {
   font-size: 14px;
-  width: 25%;
-  margin: 20px;
+  width: 24%;
+  margin: 20px 15px;
 }
 ::ng-deep.mat-form-field-wrapper{
   padding-bottom: 0 !important;
 }
 
 // Medium devices (tablets, less than 992px)
-@media (max-width: 991.98px) {
+@media (max-width: 1268px) {
+  .mat-form-field {
+    margin: 20px 9px;
+    width: 34%;
+  }
+}
+// Medium devices (tablets, less than 992px)
+@media (max-width: 991px) {
   .mat-form-field {
     width: 90%;
     margin: 5px 20px;
