@@ -21,7 +21,7 @@
   </mat-form-field>
 </div>
 
-<p class="loading" *ngIf="loading">Please wait ...</p>
+<!--<p class="loading" *ngIf="loading">Please wait ...</p>-->
 <div class="table-responsive">
   <mat-table  data-cy="users-table" class="scrollable-table" matTableExporter #exporter="matTableExporter" [dataSource]="dataSource" matSort (scroll)="onTableScroll($event)">
 

@@ -1,4 +1,4 @@
-# Jumia Interview test
+# SPA Application
 This is a Single Page Application that displays a list of users in a table.
 
 ## Clone the application 
@@ -11,7 +11,7 @@ Run `npm install`
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`.
 
 ## Build
 
