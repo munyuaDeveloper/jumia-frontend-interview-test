@@ -5,8 +5,8 @@
       *ngIf="sidenav.mode === 'over'"
       (click)="sidenav.toggle()"
     >
-      <mat-icon *ngIf="!sidenav.opened"> menu </mat-icon>
-      <mat-icon *ngIf="sidenav.opened"> close </mat-icon>
+      <mat-icon *ngIf="!sidenav.opened" class="menu-icon"> menu </mat-icon>
+      <mat-icon *ngIf="sidenav.opened"  class="close-icon"> close </mat-icon>
     </button>
     <img class="logo" src="assets/images/jumia-logo.png" alt="African No.1 online shopping">
   </mat-toolbar>
